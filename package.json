@@ -15,5 +15,8 @@
     "@astrojs/cloudflare": "^13.1.6",
     "@storyblok/astro": "^9.0.2",
     "astro": "^6.1.2"
+  },
+  "devDependencies": {
+    "vite-plugin-mkcert": "^1.17.10"
   }
 }

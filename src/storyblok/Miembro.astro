@@ -1,5 +1,6 @@
 ---
 import { storyblokEditable, renderRichText } from '@storyblok/astro';
+import Gallery from '../components/Gallery.astro';
 
 const { blok } = Astro.props;
 const descripcionHtml = blok.descripcion ? renderRichText(blok.descripcion) : '';
@@ -21,6 +22,10 @@ const descripcionHtml = blok.descripcion ? renderRichText(blok.descripcion) : ''
 		{descripcionHtml && <div class="miembro-detail__descripcion" set:html={descripcionHtml} />}
 	</div>
 </article>
+
+<div class="miembro-gallery">
+	<Gallery images={blok.galeria || []} />
+</div>
 
 <style>
 	.miembro-detail {
@@ -64,6 +69,11 @@ const descripcionHtml = blok.descripcion ? renderRichText(blok.descripcion) : ''
 		margin-top: var(--space-s);
 	}
 
+	.miembro-gallery {
+		width: var(--container-width);
+		margin: 0 auto;
+	}
+
 	@media (max-width: 768px) {
 		.miembro-detail {
 			grid-template-columns: 1fr;
@@ -73,6 +83,10 @@ const descripcionHtml = blok.descripcion ? renderRichText(blok.descripcion) : ''
 
 		.miembro-detail__foto {
 			max-width: 400px;
+		}
+
+		.miembro-gallery {
+			width: 90vw;
 		}
 	}
 </style>

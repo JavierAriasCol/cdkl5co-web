@@ -1,5 +1,6 @@
 ---
 import { storyblokEditable, renderRichText } from '@storyblok/astro';
+import Gallery from '../components/Gallery.astro';
 
 const { blok } = Astro.props;
 const descripcionHtml = blok.descripcion ? renderRichText(blok.descripcion) : '';
@@ -26,6 +27,7 @@ const fechaFormateada = blok.fecha
 		</div>
 		{descripcionHtml && <div class="evento-detail__descripcion" set:html={descripcionHtml} />}
 	</div>
+	<Gallery images={blok.galeria || []} />
 </article>
 
 <style>

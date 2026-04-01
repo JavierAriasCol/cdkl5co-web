@@ -1,8 +1,9 @@
 // @ts-check
-import { defineConfig, envField } from 'astro/config';
+import { defineConfig } from 'astro/config';
 import { storyblok } from '@storyblok/astro';
 import cloudflare from '@astrojs/cloudflare';
 import { loadEnv } from 'vite';
+import mkcert from 'vite-plugin-mkcert';
 
 const env = loadEnv('', process.cwd(), 'STORYBLOK');
 
@@ -15,6 +16,7 @@ export default defineConfig({
 	integrations: [
 		storyblok({
 			accessToken: env.STORYBLOK_TOKEN,
+			livePreview: true,
 			components: {
 				miembro: 'storyblok/Miembro',
 				evento: 'storyblok/Evento',
@@ -24,4 +26,7 @@ export default defineConfig({
 			},
 		}),
 	],
+	vite: {
+		plugins: [mkcert()],
+	},
 });
