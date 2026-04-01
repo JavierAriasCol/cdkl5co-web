@@ -11,14 +11,14 @@ import Layout from '../layouts/Layout.astro';
 			<p class="hero__text">Únete a nuestra comunidad de WhatsApp para conectar, compartir experiencias y obtener apoyo sobre CDKL5 en Colombia. ¡Te esperamos!</p>
 			<a href="https://chat.whatsapp.com/H7Py4QtxaTG6qSKiAgactr" class="btn btn--primary">Unirme</a>
 			<div class="hero__arrow">
-				<img src="/icons/arrow-down.svg" alt="" width="24" height="24" />
+				<img src="/icons/arrow-down.svg" alt="" width="20" height="20" />
 			</div>
 		</div>
-		<div class="hero__image">
+		<div class="hero__phone">
 			<img
 				src="/images/cdkl5-app.webp"
 				srcset="/images/cdkl5-app-768x905.webp 768w, /images/cdkl5-app.webp 1120w"
-				sizes="(max-width: 768px) 100vw, 50vw"
+				sizes="(max-width: 768px) 80vw, 35vw"
 				alt="App CDKL5 Colombia"
 				width="1120"
 				height="1320"
@@ -46,6 +46,32 @@ import Layout from '../layouts/Layout.astro';
 	<section class="section-symptoms">
 		<div class="section-symptoms__inner">
 			<h2>Síntomas del Trastorno por Deficiencia de CDKL5 - TDC</h2>
+			<p class="section-symptoms__text">La deficiencia de CDKL5 está asociada con una discapacidad intelectual severa con necesidades de salud complejas. A continuación se puede ver una lista de los síntomas más comunes, sin embargo, es importante señalar que parece haber un amplio espectro en términos de la gravedad en algunos niños, desde moderadamente hasta profundamente afectados.</p>
+			<ul class="section-symptoms__list">
+				<li>Convulsiones epilépticas que comienzan en los primeros 8 meses de vida (se han reportado algunas excepciones)</li>
+				<li>Espasmos infantiles (en aproximadamente el 50%)</li>
+				<li>Muchos tipos diferentes de convulsiones, incluyendo sacudidas mioclónicas</li>
+				<li>Habilidades manuales muy limitadas</li>
+				<li>Estereotipias manuales en forma de movimientos circulares o llevarse las manos a la boca</li>
+				<li>Marcado retraso en el desarrollo</li>
+				<li>Habla limitada o ausente</li>
+				<li>Hipersensibilidad al tacto, por ejemplo, aversión a cepillarse el cabello</li>
+				<li>Falta de contacto visual o contacto visual deficiente</li>
+				<li>Deterioro Visual Cortical (DVC), también conocido como "ceguera cortical"</li>
+				<li>Características como mirada de lado y hábito de cruzar las piernas</li>
+				<li>Reflujo gastroesofágico y otros problemas gastrointestinales severos como baja motilidad intestinal</li>
+				<li>Estreñimiento</li>
+				<li>Pies pequeños y fríos</li>
+				<li>Irregularidades respiratorias como hiperventilación</li>
+				<li>Rechinar de dientes</li>
+				<li>Episodios de risa o llanto sin razón aparente</li>
+				<li>Tono muscular bajo/deficiente</li>
+				<li>Algunas tendencias similares al autismo</li>
+				<li>Escoliosis</li>
+				<li>Apraxia</li>
+				<li>Dificultades para comer/beber (rechazo a comer y beber, así como dejar de comer por completo)</li>
+				<li>Sueño interrumpido</li>
+			</ul>
 		</div>
 	</section>
 </Layout>
@@ -53,17 +79,21 @@ import Layout from '../layouts/Layout.astro';
 <style>
 	/* ===== Hero ===== */
 	.hero {
-		width: var(--container-width);
+		width: 85vw;
+		max-width: 100%;
 		margin: 0 auto;
+		min-height: 100vh;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		align-items: center;
-		gap: var(--space-m);
+		grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+		column-gap: 3.5vw;
+		align-items: initial;
 	}
 
 	.hero__content {
 		display: flex;
 		flex-direction: column;
+		align-self: center;
+		justify-content: center;
 		align-items: center;
 		text-align: center;
 		gap: var(--space-s);
@@ -80,35 +110,43 @@ import Layout from '../layouts/Layout.astro';
 
 	.hero__text {
 		font-size: var(--fs-body);
-		padding: 0 var(--space-m);
+		max-width: 50ch;
 	}
 
 	.hero__arrow {
 		animation: arrowdown 1.6s infinite linear;
-		position: absolute;
-		top: 90vh;
+		margin-top: var(--space-xs);
+		align-self: center;
 	}
 
 	.hero__arrow img {
-		width: 24px;
+		width: 20px;
 		height: auto;
+		opacity: 0.6;
 	}
 
 	@keyframes arrowdown {
 		0%   { transform: translateY(0); }
-		50%  { transform: translateY(10px); }
+		50%  { transform: translateY(8px); }
 		100% { transform: translateY(0); }
 	}
 
-	.hero__image {
+	/* Phone image with gradient background */
+	.hero__phone {
 		width: 100%;
 		display: flex;
 		justify-content: center;
+		flex-direction: column;
 	}
 
-	.hero__image img {
-		border-radius: var(--radius-l);
+	.hero__phone img {
+		width: 100%;
+		max-width: 600px;
+		height: auto;
+		aspect-ratio: 1 / 1;
 		object-fit: cover;
+		object-position: center;
+		border-radius: 32px;
 	}
 
 	/* ===== Section Info ===== */
@@ -124,6 +162,7 @@ import Layout from '../layouts/Layout.astro';
 		padding: var(--space-xl) 0;
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		gap: var(--space-m);
 		color: var(--color-white);
 	}
@@ -131,6 +170,7 @@ import Layout from '../layouts/Layout.astro';
 	.section-info__inner h2 {
 		font-size: var(--fs-h2);
 		color: var(--color-white);
+		max-width: 860px;
 	}
 
 	.section-info__text {
@@ -148,30 +188,61 @@ import Layout from '../layouts/Layout.astro';
 		width: var(--container-width);
 		margin: 0 auto;
 		padding: var(--space-xl) 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--space-m);
 	}
 
 	.section-symptoms__inner h2 {
 		font-size: var(--fs-h2);
-		max-width: 20ch;
+		max-width: 860px;
 	}
 
-	/* ===== Tablet ===== */
+	.section-symptoms__text {
+		font-size: var(--fs-body-lg);
+		max-width: 860px;
+		line-height: 1.6;
+	}
+
+	.section-symptoms__list {
+		max-width: 860px;
+		font-size: var(--fs-body);
+		line-height: 1.8;
+		padding-left: 1.5em;
+	}
+
+	.section-symptoms__list li {
+		margin-bottom: var(--space-xs);
+	}
+
+	/* ===== Tablet (481px — 1024px) ===== */
 	@media (max-width: 1024px) {
 		.hero {
-			grid-template-columns: 1fr;
 			width: 90vw;
-			gap: var(--space-l);
+			min-height: auto;
+			grid-template-columns: 1fr;
 		}
 
 		.hero__content {
-			order: 1;
+			align-items: center;
+			text-align: center;
+			padding-bottom: 0;
 			padding-top: var(--space-m);
 		}
 
-		.hero__image {
-			order: 2;
-			max-width: 500px;
+		.hero__text {
+			max-width: 100%;
+		}
+
+		.hero__phone {
+			max-width: 400px;
 			margin: 0 auto;
+			min-height: 400px;
+		}
+
+		.hero__phone-bg {
+			inset: 0;
 		}
 
 		.hero__arrow {
@@ -197,29 +268,24 @@ import Layout from '../layouts/Layout.astro';
 		}
 	}
 
-	/* ===== Mobile ===== */
+	/* ===== Mobile (≤ 480px) ===== */
 	@media (max-width: 480px) {
 		.hero {
 			width: 90vw;
 			grid-template-columns: 1fr;
-			gap: var(--space-m);
 		}
 
 		.hero__content {
 			gap: var(--space-s);
-			padding-top: var(--space-l);
+			padding-top: var(--space-m);
 		}
 
-		.hero__text {
-			padding: 0;
+		.hero__phone {
+			min-height: 350px;
 		}
 
-		.hero__image {
-			padding: 0 var(--space-s);
-		}
-
-		.hero__image img {
-			border-radius: var(--radius-m);
+		.hero__phone img {
+			width: 75%;
 		}
 
 		.section-info {
