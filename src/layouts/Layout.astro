@@ -1,0 +1,302 @@
+---
+import '../styles/design-system.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = 'Asociacion de Afectados con Sindrome por Deficiencia CDKL5 en Colombia' } = Astro.props;
+---
+
+<html lang="es-CO">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<link rel="canonical" href="https://cdkl5co.pages.dev/" />
+
+		<!-- Open Graph -->
+		<meta property="og:url" content="https://cdkl5co.pages.dev/" />
+		<meta property="og:site_name" content="CDKL5 Colombia" />
+		<meta property="og:locale" content="es_CO" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={title} />
+
+		<!-- Schema.org -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "http://schema.org",
+			"@type": "Organization",
+			"name": "Asociacion de Afectados con Sindrome por Deficiencia CDKL5 Colombia",
+			"url": "https://cdkl5co.pages.dev",
+			"alternateName": "CDKL5 Colombia"
+		})} />
+	</head>
+	<body>
+		<!-- Header -->
+		<header class="header">
+			<nav class="header__nav">
+				<a href="/" class="logo">
+					<img src="/images/CDKL5-Colombia.svg" alt="CDKL5 Colombia" />
+				</a>
+				<div class="header__links">
+					<a href="/miembros">Miembros</a>
+					<a href="/eventos">Eventos</a>
+				</div>
+			</nav>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		<!-- Footer -->
+		<footer class="footer">
+			<picture class="footer__thanks">
+				<img src="/images/thanks.svg" alt="" />
+			</picture>
+			<h2 class="footer__heading"><strong>No estas solo</strong> en este viaje, tu voz <strong>cuenta</strong></h2>
+			<a href="https://chat.whatsapp.com/H7Py4QtxaTG6qSKiAgactr" class="btn btn--light">Unirme</a>
+
+			<div class="footer__nav">
+				<a href="/" class="footer__logo">
+					<img src="/images/cdkl5-white.svg" alt="CDKL5 Colombia" />
+				</a>
+				<p class="footer__follow">Siguenos y forma parte!</p>
+				<div class="footer__social">
+					<a href="https://web.facebook.com/cdkl5colombia" target="_blank" rel="noopener" class="footer__social-link">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<path d="M12.0028 1.14453C5.97805 1.14453 1.09375 6.02883 1.09375 12.0536C1.09375 17.523 5.12268 22.0389 10.3724 22.8278V14.945H7.67342V12.0774H10.3724V10.1693C10.3724 7.01015 11.9116 5.62321 14.5372 5.62321C15.7947 5.62321 16.4597 5.71643 16.7746 5.75908V8.26222H14.9835C13.8688 8.26222 13.4795 9.31891 13.4795 10.51V12.0774H16.7463L16.303 14.945H13.4795V22.8511C18.8042 22.1287 22.9119 17.5761 22.9119 12.0536C22.9119 6.02883 18.0276 1.14453 12.0028 1.14453Z" fill="white"/>
+						</svg>
+						<span>Facebook</span>
+					</a>
+					<a href="https://www.instagram.com/cdkl5_colombia/" target="_blank" rel="noopener" class="footer__social-link">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<path d="M15.5006 11.9999C15.5006 10.0669 13.933 8.49987 12.0003 8.49987C10.0676 8.49987 8.50056 10.0663 8.5 11.9999C8.5 13.9329 10.067 15.4999 12.0003 15.4999C13.9335 15.4999 15.5006 13.9329 15.5006 11.9999Z" fill="white"/>
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M7.67098 1.56335C8.79067 1.51257 9.14864 1.49988 12.0003 1.49988H11.9981C14.8508 1.49988 15.2071 1.51257 16.3274 1.56335C17.4448 1.61469 18.2082 1.79187 18.8778 2.05129C19.5689 2.31954 20.1531 2.67832 20.7372 3.2623C21.3213 3.84627 21.6798 4.4319 21.949 5.12241C22.2071 5.79028 22.3842 6.5531 22.4366 7.67082C22.4868 8.79076 22.5 9.14898 22.5 12.0004C22.5 14.8519 22.4868 15.209 22.4366 16.3289C22.3842 17.4461 22.2071 18.2095 21.949 18.8773C21.6798 19.5673 21.3213 20.1535 20.7372 20.7369C20.1536 21.3209 19.5689 21.6802 18.8784 21.9485C18.2104 22.2084 17.4465 22.3851 16.3285 22.4364C15.2082 22.4872 14.8513 22.4999 11.9997 22.4999C9.14809 22.4999 8.79067 22.4872 7.67042 22.4364C6.55294 22.3851 5.78956 22.2079 5.12161 21.9485C4.43159 21.6802 3.84582 21.3203 3.26227 20.7364C2.67816 20.1524 2.31964 19.5667 2.05102 18.8762C1.79178 18.2084 1.61473 17.4455 1.56343 16.3278C1.51269 15.2079 1.5 14.8508 1.5 11.9993C1.5 9.14788 1.51324 8.78965 1.56343 7.66972C1.61362 6.55255 1.79068 5.78918 2.05102 5.1213C2.32019 4.43135 2.67871 3.84517 3.26283 3.26175C3.84637 2.67832 4.43214 2.31954 5.12271 2.05129C5.79011 1.79131 6.55294 1.61469 7.67098 1.56335ZM16.3456 6.39524C16.3456 5.69921 16.9098 5.13566 17.6054 5.13566C18.3009 5.13511 18.8652 5.69921 18.8652 6.39524C18.8652 7.09126 18.3009 7.65537 17.6054 7.65537C16.9098 7.65537 16.3456 7.09071 16.3456 6.39524ZM6.60811 11.9999C6.60811 9.02203 9.02234 6.60774 12.0003 6.60774C14.9782 6.60774 17.3914 9.02203 17.3914 11.9999C17.3914 14.9777 14.9782 17.3909 12.0003 17.3909C9.02234 17.3909 6.60811 14.9777 6.60811 11.9999Z" fill="white"/>
+						</svg>
+						<span>Instagram</span>
+					</a>
+				</div>
+			</div>
+
+			<div class="footer__divider"></div>
+
+			<div class="footer__bottom">
+				<p class="footer__legal">&copy; 2024. Asociacion de Afectados con Sindrome por Deficiencia CDKL5.<br />901825610-2 NIT.</p>
+				<p class="footer__legal">Colombia.<br />Aguachica, Cesar.<br />205010 CL 12 30 A 60</p>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style>
+	/* ===== Header ===== */
+	.header {
+		position: relative;
+		z-index: 10;
+		width: var(--container-width);
+		margin: 0 auto;
+		padding: var(--space-m) 0;
+	}
+
+	.header__nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.header__links {
+		display: flex;
+		gap: var(--space-m);
+	}
+
+	.header__links a {
+		font-family: var(--font-body);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-body);
+		color: var(--color-black);
+		transition: color 0.2s;
+	}
+
+	.header__links a:hover {
+		color: var(--color-blue);
+	}
+
+	.logo img {
+		height: clamp(32px, 4vw, 56px);
+		width: auto;
+		object-fit: contain;
+	}
+
+	/* ===== Footer ===== */
+	.footer {
+		background-color: var(--color-blue);
+		width: 100%;
+		border-top-left-radius: var(--radius-xl);
+		border-top-right-radius: var(--radius-xl);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: var(--space-xl);
+	}
+
+	.footer__thanks {
+		width: clamp(160px, 20vw, 300px);
+		margin-top: var(--space-2xl);
+	}
+
+	.footer__thanks img {
+		width: 100%;
+		height: auto;
+	}
+
+	.footer__heading {
+		font-family: var(--font-heading);
+		font-size: var(--fs-h1);
+		font-weight: var(--fw-regular);
+		color: var(--color-white);
+		text-align: center;
+		line-height: 1.1;
+		margin-top: var(--space-m);
+		max-width: 16ch;
+	}
+
+	.footer__heading strong {
+		font-weight: var(--fw-semibold);
+	}
+
+	.footer .btn--light {
+		margin-top: var(--space-m);
+	}
+
+	.footer__nav {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		align-items: center;
+		width: var(--container-wide);
+		margin-top: var(--space-xl);
+		margin-bottom: var(--space-m);
+	}
+
+	.footer__logo img {
+		height: clamp(40px, 4.5vw, 64px);
+		width: auto;
+		object-fit: contain;
+	}
+
+	.footer__follow {
+		color: var(--color-white);
+		font-size: var(--fs-body-lg);
+		text-align: center;
+		line-height: 1;
+	}
+
+	.footer__social {
+		display: flex;
+		gap: 20px;
+		justify-content: flex-end;
+	}
+
+	.footer__social-link {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		color: var(--color-white);
+		transition: opacity 0.2s;
+	}
+
+	.footer__social-link:hover {
+		opacity: 0.8;
+	}
+
+	.footer__social-link span {
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-body-lg);
+	}
+
+	.footer__divider {
+		width: var(--container-wide);
+		height: 1px;
+		border-top: 1px solid var(--color-cream);
+		opacity: 0.3;
+	}
+
+	.footer__bottom {
+		width: var(--container-wide);
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		margin-top: var(--space-m);
+		margin-bottom: var(--space-m);
+		gap: var(--space-m);
+	}
+
+	.footer__legal {
+		color: var(--color-white);
+		font-size: var(--fs-caption);
+		line-height: 1.5;
+		opacity: 0.7;
+	}
+
+	/* ===== Tablet ===== */
+	@media (max-width: 1024px) {
+		.header {
+			width: 90vw;
+		}
+
+		.footer__nav {
+			width: 90vw;
+		}
+
+		.footer__bottom {
+			width: 90vw;
+		}
+
+		.footer__divider {
+			width: 90vw;
+		}
+	}
+
+	/* ===== Mobile ===== */
+	@media (max-width: 480px) {
+		.header__links {
+			gap: var(--space-s);
+		}
+
+		.footer {
+			margin-top: var(--space-l);
+			border-top-left-radius: var(--radius-l);
+			border-top-right-radius: var(--radius-l);
+		}
+
+		.footer__thanks {
+			margin-top: var(--space-xl);
+		}
+
+		.footer__nav {
+			grid-template-columns: 1fr;
+			justify-items: center;
+			gap: var(--space-m);
+			width: 90vw;
+		}
+
+		.footer__social {
+			justify-content: center;
+		}
+
+		.footer__divider {
+			width: 90vw;
+		}
+
+		.footer__bottom {
+			grid-template-columns: 1fr;
+			text-align: center;
+			width: 90vw;
+		}
+	}
+</style>

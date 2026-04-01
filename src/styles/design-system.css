@@ -1,0 +1,161 @@
+/* =============================================
+   CDKL5 Colombia — Design System
+   ============================================= */
+
+/* ===== Fonts ===== */
+@font-face {
+	font-family: "Fredoka";
+	src: url("/fonts/Fredoka-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Fredoka";
+	src: url("/fonts/Fredoka-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Fredoka";
+	src: url("/fonts/Fredoka-SemiBold.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("/fonts/SF-Pro-Display-regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("/fonts/SF-Pro-Display-Medium.woff2") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "SF Pro Display";
+	src: url("/fonts/SF-Pro-Display-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* ===== Design Tokens ===== */
+:root {
+	/* — Colors — */
+	--color-cream:       #f9f6ef;
+	--color-blue:        #8493b7;
+	--color-dark-blue:   #424471;
+	--color-black:       #0f1114;
+	--color-light-blue:  #95a5cb;
+	--color-white:       #ffffff;
+
+	/* — Typography — */
+	--font-heading: "Fredoka", sans-serif;
+	--font-body:    "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+
+	/* — Font Weights — */
+	--fw-regular:  400;
+	--fw-medium:   500;
+	--fw-semibold: 600;
+	--fw-bold:     700;
+
+	/* — Font Sizes (fluid with clamp) — */
+	--fs-display:  clamp(2.25rem, 4.7vw, 5.625rem);   /* hero title: 36px → 90px */
+	--fs-h1:       clamp(2rem, 4vw, 4.5rem);           /* h1: 32px → 72px */
+	--fs-h2:       clamp(1.75rem, 3vw, 3rem);          /* h2: 28px → 48px */
+	--fs-h3:       clamp(1.25rem, 2vw, 2rem);          /* h3: 20px → 32px */
+	--fs-body:     clamp(0.938rem, 1.2vw, 1.125rem);   /* body: 15px → 18px */
+	--fs-body-lg:  clamp(1rem, 1.5vw, 1.25rem);        /* body large: 16px → 20px */
+	--fs-small:    clamp(0.813rem, 1vw, 0.938rem);     /* small: 13px → 15px */
+	--fs-btn:      clamp(0.938rem, 1.3vw, 1.25rem);    /* button: 15px → 20px */
+	--fs-caption:  clamp(0.75rem, 0.9vw, 0.875rem);    /* caption: 12px → 14px */
+
+	/* — Spacing (fluid) — */
+	--space-xs:  clamp(0.5rem, 1vw, 1rem);
+	--space-s:   clamp(0.75rem, 1.5vw, 1.5rem);
+	--space-m:   clamp(1.5rem, 3vw, 3rem);
+	--space-l:   clamp(2rem, 5vw, 5rem);
+	--space-xl:  clamp(3rem, 7vw, 7rem);
+	--space-2xl: clamp(4rem, 10vw, 10rem);
+
+	/* — Layout — */
+	--container-width: min(80vw, 1280px);
+	--container-wide: min(90vw, 1440px);
+	--radius-s:  8px;
+	--radius-m:  16px;
+	--radius-l:  32px;
+	--radius-xl: clamp(24px, 5vw, 80px);
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+/* ===== Base ===== */
+html {
+	background-color: var(--color-cream);
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: var(--font-body);
+	color: var(--color-black);
+	font-weight: var(--fw-regular);
+	font-size: var(--fs-body);
+	line-height: 1.5;
+}
+
+h1, h2, h3 {
+	font-family: var(--font-heading);
+	line-height: 1.1;
+}
+
+/* ===== Button ===== */
+.btn {
+	display: inline-block;
+	padding: var(--space-xs) var(--space-m);
+	font-family: var(--font-body);
+	font-weight: var(--fw-medium);
+	font-size: var(--fs-btn);
+	line-height: 1;
+	border-radius: 100px;
+	border: none;
+	cursor: pointer;
+	transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+	opacity: 0.88;
+	transform: translateY(-1px);
+}
+
+.btn--primary {
+	background-color: var(--color-blue);
+	color: var(--color-cream);
+}
+
+.btn--light {
+	background-color: var(--color-cream);
+	color: var(--color-black);
+}
