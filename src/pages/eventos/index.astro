@@ -1,0 +1,88 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EventoCard from '../../components/EventoCard.astro';
+import { useStoryblokApi } from '@storyblok/astro';
+
+const storyblokApi = useStoryblokApi();
+const { data } = await storyblokApi.get('cdn/stories', {
+	content_type: 'evento',
+	version: import.meta.env.DEV ? 'draft' : 'published',
+	sort_by: 'content.fecha:desc',
+});
+
+const eventos = data?.stories || [];
+---
+
+<Layout title="Eventos - CDKL5 Colombia" description="Eventos y actividades de la comunidad CDKL5 Colombia">
+	<section class="page-eventos">
+		<div class="page-eventos__inner">
+			<h1>Eventos</h1>
+			<p class="page-eventos__intro">Actividades y encuentros de nuestra comunidad.</p>
+
+			{eventos.length > 0 ? (
+				<div class="grid">
+					{eventos.map((evento: any) => (
+						<EventoCard
+							nombre={evento.content.nombre}
+							fecha={evento.content.fecha}
+							imagen={evento.content.imagen?.filename}
+							ubicacion={evento.content.ubicacion}
+							slug={evento.slug}
+						/>
+					))}
+				</div>
+			) : (
+				<p class="page-eventos__empty">Pronto publicaremos nuestros eventos.</p>
+			)}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.page-eventos {
+		padding: var(--space-xl) 0;
+	}
+
+	.page-eventos__inner {
+		width: var(--container-width);
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-m);
+	}
+
+	.page-eventos__inner h1 {
+		font-size: var(--fs-h1);
+		color: var(--color-dark-blue);
+	}
+
+	.page-eventos__intro {
+		font-size: var(--fs-body-lg);
+		color: var(--color-black);
+		max-width: 60ch;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: var(--space-m);
+		margin-top: var(--space-m);
+	}
+
+	.page-eventos__empty {
+		font-size: var(--fs-body-lg);
+		color: var(--color-blue);
+		text-align: center;
+		padding: var(--space-xl) 0;
+	}
+
+	@media (max-width: 768px) {
+		.page-eventos__inner {
+			width: 90vw;
+		}
+
+		.grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

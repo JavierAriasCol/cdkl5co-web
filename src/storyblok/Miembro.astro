@@ -1,0 +1,78 @@
+---
+import { storyblokEditable, renderRichText } from '@storyblok/astro';
+
+const { blok } = Astro.props;
+const descripcionHtml = blok.descripcion ? renderRichText(blok.descripcion) : '';
+---
+
+<article {...storyblokEditable(blok)} class="miembro-detail">
+	{blok.foto?.filename && (
+		<img
+			src={`${blok.foto.filename}/m/600x600/filters:format(webp)`}
+			alt={blok.nombre || blok.foto.alt || ''}
+			class="miembro-detail__foto"
+			width="600"
+			height="600"
+		/>
+	)}
+	<div class="miembro-detail__info">
+		<h1 class="miembro-detail__nombre">{blok.nombre}</h1>
+		{blok.rol && <p class="miembro-detail__rol">{blok.rol}</p>}
+		{descripcionHtml && <div class="miembro-detail__descripcion" set:html={descripcionHtml} />}
+	</div>
+</article>
+
+<style>
+	.miembro-detail {
+		width: var(--container-width);
+		margin: 0 auto;
+		padding: var(--space-xl) 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-xl);
+		align-items: start;
+	}
+
+	.miembro-detail__foto {
+		border-radius: var(--radius-l);
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		aspect-ratio: 1;
+	}
+
+	.miembro-detail__info {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-s);
+	}
+
+	.miembro-detail__nombre {
+		font-size: var(--fs-h1);
+		color: var(--color-dark-blue);
+	}
+
+	.miembro-detail__rol {
+		font-size: var(--fs-body-lg);
+		color: var(--color-blue);
+		font-weight: var(--fw-medium);
+	}
+
+	.miembro-detail__descripcion {
+		font-size: var(--fs-body-lg);
+		line-height: 1.7;
+		margin-top: var(--space-s);
+	}
+
+	@media (max-width: 768px) {
+		.miembro-detail {
+			grid-template-columns: 1fr;
+			width: 90vw;
+			gap: var(--space-m);
+		}
+
+		.miembro-detail__foto {
+			max-width: 400px;
+		}
+	}
+</style>

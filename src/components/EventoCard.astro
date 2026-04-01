@@ -1,0 +1,97 @@
+---
+interface Props {
+	nombre: string;
+	fecha?: string;
+	imagen?: string;
+	ubicacion?: string;
+	slug: string;
+}
+
+const { nombre, fecha, imagen, ubicacion, slug } = Astro.props;
+const fechaFormateada = fecha
+	? new Date(fecha).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })
+	: '';
+---
+
+<a href={`/evento/${slug}`} class="evento-card">
+	{imagen ? (
+		<img
+			src={`${imagen}/m/600x340/filters:format(webp)`}
+			alt={nombre}
+			class="evento-card__imagen"
+			width="600"
+			height="340"
+			loading="lazy"
+		/>
+	) : (
+		<div class="evento-card__imagen evento-card__imagen--placeholder">
+			<span>Evento</span>
+		</div>
+	)}
+	<div class="evento-card__info">
+		<h3 class="evento-card__nombre">{nombre}</h3>
+		{fechaFormateada && <time class="evento-card__fecha">{fechaFormateada}</time>}
+		{ubicacion && <span class="evento-card__ubicacion">{ubicacion}</span>}
+	</div>
+</a>
+
+<style>
+	.evento-card {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xs);
+		text-decoration: none;
+		color: inherit;
+		transition: transform 0.2s;
+	}
+
+	.evento-card:hover {
+		transform: translateY(-4px);
+	}
+
+	.evento-card__imagen {
+		border-radius: var(--radius-l);
+		width: 100%;
+		aspect-ratio: 600/340;
+		object-fit: cover;
+	}
+
+	.evento-card__imagen--placeholder {
+		background-color: var(--color-light-blue);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.evento-card__imagen--placeholder span {
+		font-family: var(--font-heading);
+		font-size: var(--fs-h3);
+		color: var(--color-white);
+		font-weight: var(--fw-medium);
+	}
+
+	.evento-card__info {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.evento-card__nombre {
+		font-family: var(--font-heading);
+		font-size: var(--fs-h3);
+		color: var(--color-dark-blue);
+		font-weight: var(--fw-medium);
+	}
+
+	.evento-card__fecha {
+		font-size: var(--fs-body);
+		color: var(--color-blue);
+		font-weight: var(--fw-medium);
+	}
+
+	.evento-card__ubicacion {
+		font-size: var(--fs-small);
+		color: var(--color-black);
+		opacity: 0.6;
+	}
+</style>

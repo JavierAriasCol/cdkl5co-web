@@ -1,0 +1,84 @@
+---
+import { storyblokEditable, renderRichText } from '@storyblok/astro';
+
+const { blok } = Astro.props;
+const descripcionHtml = blok.descripcion ? renderRichText(blok.descripcion) : '';
+const fechaFormateada = blok.fecha
+	? new Date(blok.fecha).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })
+	: '';
+---
+
+<article {...storyblokEditable(blok)} class="evento-detail">
+	{blok.imagen?.filename && (
+		<img
+			src={`${blok.imagen.filename}/m/1200x630/filters:format(webp)`}
+			alt={blok.nombre || blok.imagen.alt || ''}
+			class="evento-detail__imagen"
+			width="1200"
+			height="630"
+		/>
+	)}
+	<div class="evento-detail__info">
+		<h1 class="evento-detail__nombre">{blok.nombre}</h1>
+		<div class="evento-detail__meta">
+			{fechaFormateada && <time class="evento-detail__fecha">{fechaFormateada}</time>}
+			{blok.ubicacion && <span class="evento-detail__ubicacion">{blok.ubicacion}</span>}
+		</div>
+		{descripcionHtml && <div class="evento-detail__descripcion" set:html={descripcionHtml} />}
+	</div>
+</article>
+
+<style>
+	.evento-detail {
+		width: var(--container-width);
+		margin: 0 auto;
+		padding: var(--space-xl) 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-m);
+	}
+
+	.evento-detail__imagen {
+		border-radius: var(--radius-l);
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		aspect-ratio: 1200/630;
+	}
+
+	.evento-detail__info {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-s);
+	}
+
+	.evento-detail__nombre {
+		font-size: var(--fs-h1);
+		color: var(--color-dark-blue);
+	}
+
+	.evento-detail__meta {
+		display: flex;
+		gap: var(--space-m);
+		font-size: var(--fs-body-lg);
+		color: var(--color-blue);
+		font-weight: var(--fw-medium);
+	}
+
+	.evento-detail__descripcion {
+		font-size: var(--fs-body-lg);
+		line-height: 1.7;
+		margin-top: var(--space-s);
+	}
+
+	@media (max-width: 768px) {
+		.evento-detail {
+			width: 90vw;
+		}
+
+		.evento-detail__meta {
+			flex-direction: column;
+			gap: var(--space-xs);
+		}
+	}
+</style>

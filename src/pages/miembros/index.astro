@@ -1,0 +1,86 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import MiembroCard from '../../components/MiembroCard.astro';
+import { useStoryblokApi } from '@storyblok/astro';
+
+const storyblokApi = useStoryblokApi();
+const { data } = await storyblokApi.get('cdn/stories', {
+	content_type: 'miembro',
+	version: import.meta.env.DEV ? 'draft' : 'published',
+});
+
+const miembros = data?.stories || [];
+---
+
+<Layout title="Miembros - CDKL5 Colombia" description="Conoce a los miembros de la comunidad CDKL5 Colombia">
+	<section class="page-miembros">
+		<div class="page-miembros__inner">
+			<h1>Nuestros Miembros</h1>
+			<p class="page-miembros__intro">Conoce a las familias que forman parte de nuestra comunidad.</p>
+
+			{miembros.length > 0 ? (
+				<div class="grid">
+					{miembros.map((miembro: any) => (
+						<MiembroCard
+							nombre={miembro.content.nombre}
+							rol={miembro.content.rol}
+							foto={miembro.content.foto?.filename}
+							slug={miembro.slug}
+						/>
+					))}
+				</div>
+			) : (
+				<p class="page-miembros__empty">Pronto conocerás a nuestros miembros.</p>
+			)}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.page-miembros {
+		padding: var(--space-xl) 0;
+	}
+
+	.page-miembros__inner {
+		width: var(--container-width);
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-m);
+	}
+
+	.page-miembros__inner h1 {
+		font-size: var(--fs-h1);
+		color: var(--color-dark-blue);
+	}
+
+	.page-miembros__intro {
+		font-size: var(--fs-body-lg);
+		color: var(--color-black);
+		max-width: 60ch;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		gap: var(--space-m);
+		margin-top: var(--space-m);
+	}
+
+	.page-miembros__empty {
+		font-size: var(--fs-body-lg);
+		color: var(--color-blue);
+		text-align: center;
+		padding: var(--space-xl) 0;
+	}
+
+	@media (max-width: 768px) {
+		.page-miembros__inner {
+			width: 90vw;
+		}
+
+		.grid {
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		}
+	}
+</style>

@@ -1,0 +1,77 @@
+---
+interface Props {
+	nombre: string;
+	rol?: string;
+	foto?: string;
+	slug: string;
+}
+
+const { nombre, rol, foto, slug } = Astro.props;
+---
+
+<a href={`/miembro/${slug}`} class="miembro-card">
+	{foto ? (
+		<img
+			src={`${foto}/m/400x400/filters:format(webp)`}
+			alt={nombre}
+			class="miembro-card__foto"
+			width="400"
+			height="400"
+			loading="lazy"
+		/>
+	) : (
+		<div class="miembro-card__foto miembro-card__foto--placeholder">
+			<span>{nombre.charAt(0)}</span>
+		</div>
+	)}
+	<h3 class="miembro-card__nombre">{nombre}</h3>
+	{rol && <p class="miembro-card__rol">{rol}</p>}
+</a>
+
+<style>
+	.miembro-card {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xs);
+		text-decoration: none;
+		color: inherit;
+		transition: transform 0.2s;
+	}
+
+	.miembro-card:hover {
+		transform: translateY(-4px);
+	}
+
+	.miembro-card__foto {
+		border-radius: var(--radius-l);
+		width: 100%;
+		aspect-ratio: 1;
+		object-fit: cover;
+	}
+
+	.miembro-card__foto--placeholder {
+		background-color: var(--color-light-blue);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.miembro-card__foto--placeholder span {
+		font-family: var(--font-heading);
+		font-size: var(--fs-h1);
+		color: var(--color-white);
+		font-weight: var(--fw-semibold);
+	}
+
+	.miembro-card__nombre {
+		font-family: var(--font-heading);
+		font-size: var(--fs-h3);
+		color: var(--color-dark-blue);
+		font-weight: var(--fw-medium);
+	}
+
+	.miembro-card__rol {
+		font-size: var(--fs-body);
+		color: var(--color-blue);
+	}
+</style>
