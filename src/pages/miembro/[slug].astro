@@ -9,7 +9,7 @@ const storyblokApi = useStoryblokApi();
 let story;
 try {
 	const { data } = await storyblokApi.get(`cdn/stories/miembros/${slug}`, {
-		version: import.meta.env.DEV ? 'draft' : 'published',
+		version: 'draft',
 	});
 	story = data?.story;
 } catch {

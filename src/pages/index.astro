@@ -228,7 +228,7 @@ import Layout from '../layouts/Layout.astro';
 			align-items: center;
 			text-align: center;
 			padding-bottom: 0;
-			padding-top: var(--space-m);
+			padding-top: calc(60px + var(--space-m));
 		}
 
 		.hero__text {
@@ -239,6 +239,7 @@ import Layout from '../layouts/Layout.astro';
 			max-width: 400px;
 			margin: 0 auto;
 			min-height: 400px;
+			align-items: center;
 		}
 
 		.hero__phone-bg {
@@ -273,19 +274,21 @@ import Layout from '../layouts/Layout.astro';
 		.hero {
 			width: 90vw;
 			grid-template-columns: 1fr;
+			row-gap: var(--space-m);
 		}
 
 		.hero__content {
 			gap: var(--space-s);
-			padding-top: var(--space-m);
+			padding-top: calc(50px + var(--space-s));
 		}
 
 		.hero__phone {
-			min-height: 350px;
+			min-height: auto;
+			align-items: center;
 		}
 
 		.hero__phone img {
-			width: 75%;
+			width: 85%;
 		}
 
 		.section-info {
