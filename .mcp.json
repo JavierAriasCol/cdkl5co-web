@@ -4,7 +4,7 @@
       "command": "node",
       "args": ["/Users/javierarias/Documents/github/utilities/storyblok-mcp/build/index.js"],
       "env": {
-        "STORYBLOK_SPACE_ID": "#291555794398490",
+        "STORYBLOK_SPACE_ID": "291555794398490",
         "STORYBLOK_MANAGEMENT_TOKEN": "LQvfkZrZdQj3SMQ0tPXK2Att-161291710391525-Dnq9BELzBUdRR1ARoFp5",
         "STORYBLOK_DEFAULT_PUBLIC_TOKEN": "ZfjgL0fr2hoObEgbSRHEGgtt",
         "GOOGLE_GENERATIVE_AI_API_KEY": "YOUR_GEMINI_API_KEY"
