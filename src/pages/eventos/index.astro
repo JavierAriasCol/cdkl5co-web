@@ -16,8 +16,10 @@ const eventos = data?.stories || [];
 <Layout title="Eventos - CDKL5 Colombia" description="Eventos y actividades de la comunidad CDKL5 Colombia">
 	<section class="page-eventos">
 		<div class="page-eventos__inner">
-			<h1>Eventos</h1>
-			<p class="page-eventos__intro">Actividades y encuentros de nuestra comunidad.</p>
+			<div class="page-eventos__header">
+				<h1>Eventos</h1>
+				<p class="page-eventos__intro">Actividades y encuentros de nuestra comunidad.</p>
+			</div>
 
 			{eventos.length > 0 ? (
 				<div class="grid">
@@ -40,7 +42,7 @@ const eventos = data?.stories || [];
 
 <style>
 	.page-eventos {
-		padding: var(--space-xl) 0;
+		padding: calc(60px + var(--space-m)) 0 var(--space-xl);
 	}
 
 	.page-eventos__inner {
@@ -51,7 +53,13 @@ const eventos = data?.stories || [];
 		gap: var(--space-m);
 	}
 
-	.page-eventos__inner h1 {
+	.page-eventos__header {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.page-eventos__header h1 {
 		font-size: var(--fs-h1);
 		color: var(--color-dark-blue);
 	}
