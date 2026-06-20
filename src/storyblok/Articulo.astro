@@ -1,0 +1,86 @@
+---
+import { storyblokEditable, renderRichText } from '@storyblok/astro';
+import Gallery from '../components/Gallery.astro';
+
+const { blok } = Astro.props;
+const contenidoHtml = blok.contenido ? renderRichText(blok.contenido) : '';
+const fechaFormateada = blok.fecha
+	? new Date(blok.fecha).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })
+	: '';
+---
+
+<article {...storyblokEditable(blok)} class="articulo-detail">
+	{blok.imagen?.filename && (
+		<img
+			src={`${blok.imagen.filename}/m/1200x630/filters:format(webp)`}
+			alt={blok.titulo || blok.imagen.alt || ''}
+			class="articulo-detail__imagen"
+			width="1200"
+			height="630"
+		/>
+	)}
+	<div class="articulo-detail__info">
+		<h1 class="articulo-detail__titulo">{blok.titulo}</h1>
+		<div class="articulo-detail__meta">
+			{fechaFormateada && <time class="articulo-detail__fecha">{fechaFormateada}</time>}
+			{blok.autor && <span class="articulo-detail__autor">{blok.autor}</span>}
+		</div>
+		{contenidoHtml && <div class="articulo-detail__contenido" set:html={contenidoHtml} />}
+	</div>
+	<Gallery images={blok.galeria || []} />
+</article>
+
+<style>
+	.articulo-detail {
+		width: var(--container-width);
+		margin: 0 auto;
+		padding: calc(60px + var(--space-m)) 0 var(--space-xl);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-m);
+	}
+
+	.articulo-detail__imagen {
+		border-radius: var(--radius-l);
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		aspect-ratio: 1200/630;
+	}
+
+	.articulo-detail__info {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-s);
+	}
+
+	.articulo-detail__titulo {
+		font-size: var(--fs-h1);
+		color: var(--color-dark-blue);
+	}
+
+	.articulo-detail__meta {
+		display: flex;
+		gap: var(--space-m);
+		font-size: var(--fs-body-lg);
+		color: var(--color-blue);
+		font-weight: var(--fw-medium);
+	}
+
+	.articulo-detail__contenido {
+		font-size: var(--fs-body-lg);
+		line-height: 1.7;
+		margin-top: var(--space-s);
+	}
+
+	@media (max-width: 768px) {
+		.articulo-detail {
+			width: 90vw;
+		}
+
+		.articulo-detail__meta {
+			flex-direction: column;
+			gap: var(--space-xs);
+		}
+	}
+</style>

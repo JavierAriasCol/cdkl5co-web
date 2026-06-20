@@ -20,6 +20,7 @@ export default defineConfig({
 			components: {
 				miembro: 'storyblok/Miembro',
 				evento: 'storyblok/Evento',
+				articulo: 'storyblok/Articulo',
 			},
 			apiOptions: {
 				region: 'eu',

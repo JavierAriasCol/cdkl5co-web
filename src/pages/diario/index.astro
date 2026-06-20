@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticuloCard from '../../components/ArticuloCard.astro';
+import { useStoryblokApi } from '@storyblok/astro';
+
+const storyblokApi = useStoryblokApi();
+const { data } = await storyblokApi.get('cdn/stories', {
+	content_type: 'articulo',
+	version: 'draft',
+	sort_by: 'content.fecha:desc',
+});
+
+const articulos = data?.stories || [];
+---
+
+<Layout title="Diario - CDKL5 Colombia" description="Noticias, historias y contenido de la comunidad CDKL5 Colombia">
+	<section class="page-diario">
+		<div class="page-diario__inner">
+			<div class="page-diario__header">
+				<h1>Diario</h1>
+				<p class="page-diario__intro">Noticias, historias y contenido de nuestra comunidad.</p>
+			</div>
+
+			{articulos.length > 0 ? (
+				<div class="grid">
+					{articulos.map((articulo: any) => (
+						<ArticuloCard
+							titulo={articulo.content.titulo}
+							fecha={articulo.content.fecha}
+							resumen={articulo.content.resumen}
+							imagen={articulo.content.imagen?.filename}
+							slug={articulo.slug}
+						/>
+					))}
+				</div>
+			) : (
+				<p class="page-diario__empty">Pronto publicaremos nuestras entradas.</p>
+			)}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.page-diario {
+		padding: calc(60px + var(--space-m)) 0 var(--space-xl);
+	}
+
+	.page-diario__inner {
+		width: var(--container-width);
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-m);
+	}
+
+	.page-diario__header {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.page-diario__header h1 {
+		font-size: var(--fs-h1);
+		color: var(--color-dark-blue);
+	}
+
+	.page-diario__intro {
+		font-size: var(--fs-body-lg);
+		color: var(--color-black);
+		max-width: 60ch;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: var(--space-m);
+		margin-top: var(--space-m);
+	}
+
+	.page-diario__empty {
+		font-size: var(--fs-body-lg);
+		color: var(--color-blue);
+		text-align: center;
+		padding: var(--space-xl) 0;
+	}
+
+	@media (max-width: 768px) {
+		.page-diario__inner {
+			width: 90vw;
+		}
+
+		.grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
